@@ -3,7 +3,7 @@ id: connection-approval
 title: Connection Approval
 ---
 
-With every new connection, Unity MLAPI performs a handshake in addition to handshakes done by the transport. This is to ensure that the `NetworkConfig`s match between the Client and Server. In the `NetworkConfig`, you can specify to enable `ConnectionApproval`. 
+With every new connection,  Netcode for GameObjects (Netcode) performs a handshake in addition to handshakes done by the transport. This is to ensure that the `NetworkConfig`s match between the Client and Server. In the `NetworkConfig`, you can specify to enable `ConnectionApproval`. 
 
 Connection approval allows you to decide on a per connection basis if the connection should be allowed. Connection approval also enables you to specify the player prefab to be created, allowing you to override the default behaviour on a per player basis.
 
@@ -14,8 +14,7 @@ When `ConnectionApproval` is `true`, you are also required to provide a callback
 Server-only example:
 
 ```csharp
-using MLAPI;
-using MLAPI.Spawning;
+using Unity.Netcode;
 
 private void Setup() 
 {
@@ -23,18 +22,20 @@ private void Setup()
     NetworkManager.Singleton.StartHost();
 }
 
-private void ApprovalCheck(byte[] connectionData, ulong clientId, MLAPI.NetworkManager.ConnectionApprovedDelegate callback)
+private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
 {
     //Your logic here
     bool approve = true;
     bool createPlayerObject = true;
 
-    // The prefab hash. Use null to use the default player prefab
-    // If using this hash, replace "MyPrefabHashGenerator" with the name of a prefab added to the NetworkPrefabs field of your NetworkManager object in the scene
-    ulong? prefabHash = NetworkSpawnManager.GetPrefabHashFromGenerator("MyPrefabHashGenerator");
-    
+    // Position to spawn the player object at, set to null to use the default position
+    Vector3? positionToSpawnAt = Vector3.zero;
+
+    // Rotation to spawn the player object at, set to null to use the default rotation
+    Quaternion rotationToSpawnWith = Quaternion.identity;
+
     //If approve is true, the connection gets added. If it's false. The client gets disconnected
-    callback(createPlayerObject, prefabHash, approve, positionToSpawnAt, rotationToSpawnWith);
+    callback(createPlayerObject, null, approve, positionToSpawnAt, rotationToSpawnWith);
 }
 ```
 
@@ -45,7 +46,7 @@ The `connectionData` parameter takes any custom data of your choice that the cli
 Example:
 
 ```csharp
-using MLAPI;
+using Unity.Netcode;
 
 NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("room password");
 NetworkManager.Singleton.StartClient();
@@ -55,7 +56,7 @@ The `ConnectionData` will then be passed to the server and it will decide if the
 
 ## Timeout
 
-The MLAPI uses a callback system in order to allow for external validation. For example, you might have a steam authentication ticket sent as the `ConnectionData` that you want to validate against steams servers. This can take some time. If you don't call the callback method within the time specified in the `ClientConnectionBufferTimeout` configuration the connection will be dropped. This time starts counting when the transport has told the MLAPI about the connection. This means that you cannot attack the MLAPI by never sending the buffer, it will still time you out.
+Netcode uses a callback system in order to allow for external validation. For example, you might have a steam authentication ticket sent as the `ConnectionData` that you want to validate against steams servers. This can take some time. If you don't call the callback method within the time specified in the `ClientConnectionBufferTimeout` configuration the connection will be dropped. This time starts counting when the transport has told  Netcode about the connection. This means that you cannot attack  Netcode by never sending the buffer, it will still time you out.
 
 ## Security
 

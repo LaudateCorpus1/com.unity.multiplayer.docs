@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: About Unity Transport
+title: Getting Started with the Unity Transport Package (UTP)
 ---
 
 Unity Transport provides the `com.unity.transport` package, used to add multiplayer and network features to your project.
@@ -15,7 +15,7 @@ All Transport code and documentation is covered by Unity Companion License. See 
 
 ## Overview
 
-![Transport Overview](/img/transport/layercake.png)
+[Transport Overview](/img/transport/layercake.png)
 
 ## Installing Transport
 

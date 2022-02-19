@@ -10,7 +10,7 @@ module.exports = {
     projectName: 'docusaurus', // Usually your repo name.
     scripts: [{
       //OneTrust Cookie required by Unity web team
-        src: 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js', 
+        src: 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
         async: true,
         'data-domain-script': '6e91be4c-3145-4ea2-aa64-89d716064836'
     }],
@@ -30,32 +30,32 @@ module.exports = {
         apiKey: 'dd157a25931bf7948bfc08e79fbe2c8c',
         appId: '42DEOQD6E7',
         indexName: 'MultiplayerDocs',
-  
+
         // Optional: for versioned docs
         //contextualSearch: false,
-  
+
         // Optional: Algolia search parameters
         //searchParameters: {},
-  
+
         //... other Algolia params
       },
-  
+
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'Unity Multiplayer Networking',
+        title: 'Multiplayer Networking',
         logo: {
           alt: 'Unity',
           src: 'img/logo.png',
         },
         items: [
           {
-            label: 'MLAPI',
+            label: 'Netcode for GameObjects',
             className: 'nav-break',
-            to: '/getting-started/about-mlapi',
+            to: '/getting-started/about',
             position: 'left',
             items: [
               {
@@ -64,11 +64,11 @@ module.exports = {
                 docsPluginId: 'releases'
               },
               {
-                to: 'getting-started/about-mlapi',
+                to: 'getting-started/about',
                 label: 'Documentation',
               },
               {
-                to: 'mlapi-api/introduction',
+                to: 'api/introduction',
                 label: 'API Reference',
               },
             ]
@@ -101,7 +101,7 @@ module.exports = {
                 label: 'Documentation',
                 docsPluginId: 'transport',
               },
-              
+
               {
                 to: 'api/introduction',
                 label: 'API Reference',
@@ -109,20 +109,20 @@ module.exports = {
               },
             ]
           },
-          /*{
+          {
             //TRANSPORT VERSIONS
             type: 'docsVersionDropdown',
             position: 'left',
             dropdownActiveClassDisabled: true,
             docsPluginId: 'transport'
-          },*/
+          },
           {
             to: '/learn/introduction',
             label: 'Unity Multiplayer Resources',
             className: 'nav-break',
             position: 'left',
           },
-          { 
+          {
             className: 'navbar-github-link',
             position: 'right',
             to: 'contribute',
@@ -138,12 +138,12 @@ module.exports = {
                 href: 'https://github.com/Unity-Technologies/com.unity.multiplayer.docs',
               },
               {
-                label: 'MLAPI Repo',
-                href: 'https://github.com/Unity-Technologies/com.unity.multiplayer.mlapi',
+                label: 'Netcode for GameObjects Repo',
+                href: 'https://github.com/Unity-Technologies/com.unity.netcode.gameobjects',
               },
               {
-                label: 'MLAPI Community Contributions',
-                href: 'https://github.com/Unity-Technologies/mlapi-community-contributions',
+                label: 'Multiplayer Community Contributions',
+                href: 'https://github.com/Unity-Technologies/multiplayer-community-contributions',
               },
               {
                 label: 'Boss Room Repo',
@@ -175,7 +175,7 @@ module.exports = {
                 label: 'Product Roadmap',
                 href: 'https://unity.com/roadmap/unity-platform/multiplayer-networking',
               },
-              { 
+              {
                 label: 'Discord',
                 href: 'https://discord.gg/buMxnnPvTb',
               },
@@ -184,8 +184,8 @@ module.exports = {
                 href: 'https://forum.unity.com/forums/multiplayer.26/',
               },
               {
-                label: 'MLAPI Forum',
-                href: 'https://forum.unity.com/forums/mlapi.661/',
+                label: 'Netcode for GameObjects Forum',
+                href: 'https://forum.unity.com/forums/netcode-for-gameobjects.661/',
               },
               {
                 label: 'Unity Transport Forum',
@@ -248,8 +248,8 @@ module.exports = {
                 href: 'https://github.com/Unity-Technologies/com.unity.multiplayer.docs',
               },
               {
-                label: 'MLAPI Releases',
-                href: 'https://github.com/Unity-Technologies/com.unity.multiplayer.mlapi/releases/',
+                label: ' Netcode for GameObjects Releases',
+                href: 'https://github.com/Unity-Technologies/com.unity.netcode.gameobjects/releases',
               },
               {
                 label: 'Boss Room Releases',
@@ -298,6 +298,7 @@ module.exports = {
           docs: {
             path: 'docs',
             sidebarPath: require.resolve('./sidebars.js'),
+            remarkPlugins: [require('mdx-mermaid')],
             showLastUpdateAuthor: true,
             showLastUpdateTime: true,
             // Edit URL for version
@@ -305,18 +306,22 @@ module.exports = {
               versionDocsDirPath,
               docPath,
             }) {
-              return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/master/${versionDocsDirPath}/${docPath}`;
+              return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/main/${versionDocsDirPath}/${docPath}`;
             },
             includeCurrentVersion: true,
-            lastVersion: '0.1.0',
+            lastVersion: '1.0.0',
             versions: {
               current: {
                 label: 'develop',
                 path: 'develop',
               },
+              '1.0.0': {
+                label: 'v. 1.0.0',
+                 path: '',
+               },
               '0.1.0': {
                label: 'v. 0.1.0',
-                path: '',
+                path: '0.1.0',
               },
             },
             admonitions: {
@@ -377,7 +382,7 @@ module.exports = {
           id: 'releases',
           path: 'releases',
           editUrl: ({docPath}) => {
-            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/master/${docPath}`;
+            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/main/${docPath}`;
           },
           editCurrentVersion: true,
           routeBasePath: 'releases',
@@ -422,7 +427,7 @@ module.exports = {
           id: 'reference',
           path: 'reference',
           editUrl: ({docPath}) => {
-            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/master/${docPath}`;
+            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/main/${docPath}`;
           },
           editCurrentVersion: true,
           routeBasePath: 'reference',
@@ -470,24 +475,28 @@ module.exports = {
             versionDocsDirPath,
             docPath,
           }) {
-            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/master/${versionDocsDirPath}/${docPath}`;
-          },includeCurrentVersion: true,
-            lastVersion: '0.8.0',
+
+
+            return `https://github.com/Unity-Technologies/com.unity.multiplayer.docs/edit/main/${versionDocsDirPath}/${docPath}`;
+
+          },
+          includeCurrentVersion: true,
+            lastVersion: '1.0.0',
             versions: {
-              //current: {
-              //  label: 'Next',
-              //  path: 'next',
-              //},
-              /*'0.9.0': {
-               label: 'v. 0.9.0preview',
-                path: '0.9.0',
-              },*/
+              current: {
+                label: 'develop',
+                path: 'transport',
+              },
+              '1.0.0': {
+               label: 'v. 1.0.0',
+                path: '1.0.0',
+              },
               '0.8.0': {
-                label: 'v. 0.8.0preview',
+                label: 'v. 0.8.0 preview',
                  path: '0.8.0',
                },
             },
-          //onlyIncludeVersions: ["0.8.0", "0.9.0"],
+          onlyIncludeVersions: ["0.8.0", "1.0.0"],
           editCurrentVersion: true,
           routeBasePath: 'transport',
           sidebarPath: require.resolve('./sidebarsTransport.js'),
@@ -543,6 +552,22 @@ module.exports = {
             {
               to: '/docs/develop/transport-utp/about-transport-utp',
               from: '/docs/transport-utp/about-transport-utp',
+            },
+            {
+              to: '/docs/getting-started/about',
+              from: '/docs/getting-started/about-mlapi.',
+            },
+            {
+              to: '/docs/develop/getting-started/about',
+              from: '/docs/develop/getting-started/about-mlapi.',
+            },
+            {
+              to: '/docs/0.1.0/getting-started/about',
+              from: '/docs/0.1.0/getting-started/about-mlapi.',
+            },
+            {
+              to: `/docs/tools/install-tools`,
+              from: `/docs/tools-install-tooltip`,
             },
           ]
         },
